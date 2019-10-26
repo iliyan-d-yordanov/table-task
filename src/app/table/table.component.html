@@ -5,8 +5,6 @@
           [nzLoading]="loading"
           [nzFrontPagination]="true"
           [nzShowPagination]="true"
-          nzShowSizeChanger="small"
-          nzPageIndex="1"
           nzPageSize="4"
           (nzCurrentPageDataChange)="currentPageDataChange($event)">
     <thead (nzSortChange)="sort($event)" nzSingleSort>
