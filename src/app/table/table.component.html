@@ -1,0 +1,34 @@
+<nz-table #userTable
+          nzSize="middle"
+          [nzData]="users"
+          [nzBordered]="true"
+          [nzLoading]="loading"
+          [nzFrontPagination]="true"
+          [nzShowPagination]="true"
+          nzShowSizeChanger="small"
+          nzPageIndex="1"
+          nzPageSize="4"
+          (nzCurrentPageDataChange)="currentPageDataChange($event)">
+    <thead (nzSortChange)="sort($event)" nzSingleSort>
+        <tr>
+            <th nzShowSort nzSortKey="id">Id</th>
+            <th nzShowSort nzSortKey="name">Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>TODOs</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of userTable.data">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.phone}}</td>
+            <td>
+                <a>Show</a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
