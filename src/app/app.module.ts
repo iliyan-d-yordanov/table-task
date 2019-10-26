@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 import { AppComponent } from './app.component';
 
 /** config angular i18n **/
@@ -17,8 +18,9 @@ registerLocaleData(en);
   ],
   imports: [
     BrowserModule,
-    NgZorroAntdModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NgZorroAntdModule
   ],
   bootstrap: [AppComponent],
   /** config ng-zorro-antd i18n (language && date) **/
