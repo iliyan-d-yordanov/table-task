@@ -9,13 +9,13 @@ import { ITodo } from '../interfaces/itodo';
   providedIn: 'root'
 })
 export class UserService {
-  private apiEndPoint = 'https://jsonplaceholder.typicode.com/users';
+  private apiEndPoint = 'https://jsonplaceholder.typicode.com';
 
   constructor(private http: HttpClient) { }
 
   /** Get all users */
   list(): Observable<IUser[]> {
-    return this.http.get(this.apiEndPoint).pipe(
+    return this.http.get(`${this.apiEndPoint}/users`).pipe(
       map(res => res as IUser[])
       // TODO: To remove map?
     );
@@ -23,7 +23,7 @@ export class UserService {
 
   /** Get last 5 and not completed TODOs. */
   getLastTodos(user: IUser): Observable<ITodo[]> {
-    return this.http.get(`${this.apiEndPoint}/${user.id}/todos?completed=false&_sort=id&_order=desc&_limit=5`).pipe(
+    return this.http.get(`${this.apiEndPoint}/todos?userId=${user.id}&completed=false&_sort=id&_order=desc&_limit=5`).pipe(
       map(res => res as ITodo[])
     );
   }
