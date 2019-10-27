@@ -1,12 +1,12 @@
 <nz-table #userTable
+          class="usersTable"
           [nzSize]="tableSize"
           [nzData]="users"
-          [nzBordered]="true"
+          [nzBordered]="false"
           [nzLoading]="loading"
           [nzFrontPagination]="true"
           [nzShowPagination]="true"
-          [nzPageSize]="usersPerPage"
-          (nzCurrentPageDataChange)="currentPageDataChange($event)">
+          [nzPageSize]="usersPerPage">
     <thead (nzSortChange)="sort($event)" nzSingleSort>
         <tr>
             <th nzShowSort nzSortKey="id">Id</th>
@@ -19,38 +19,14 @@
     </thead>
     <tbody>
         <tr *ngFor="let user of userTable.data">
-            <td>{{user.id}}</td>
+            <td class="partial-border" [attr.col-indicator]="getCurrentPageIndicator(user.id)">{{user.id}}</td>
             <td>{{user.name}}</td>
             <td>{{user.username}}</td>
             <td>{{user.email}}</td>
             <td>{{user.phone}}</td>
             <td>
-                <button nz-button nzType="default" (click)="handleShowTodos(user)">Show</button>
+                <button nz-button nzType="link" (click)="handleShowTodos(user)">Show</button>
             </td>
         </tr>
     </tbody>
 </nz-table>
-<!-- <nz-modal [(nzVisible)]="todosModalVisible"
-          [nzTitle]="modalTitle"
-          [nzContent]="modalContent"
-          [nzFooter]="modalFooter"
-          (nzOnCancel)="handleCloseTodos()">
-    <ng-template #modalTitle>
-        Unfinished TODOs
-    </ng-template>
-
-    <ng-template #modalContent>
-        <ul nz-list
-            [nzDataSource]="userTodosList"
-            [nzRenderItem]="smallItem"
-            nzSize="small">
-            <ng-template #smallItem let-item>
-                <li nz-list-item [nzContent]="item.title"></li>
-            </ng-template>
-        </ul>
-    </ng-template>
-
-    <ng-template #modalFooter>
-        <button nz-button nzType="default" (click)="handleCloseTodos()">Close</button>
-    </ng-template>
-</nz-modal> -->

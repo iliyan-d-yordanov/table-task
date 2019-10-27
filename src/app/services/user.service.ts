@@ -17,11 +17,10 @@ export class UserService {
   list(): Observable<IUser[]> {
     return this.http.get(`${this.apiEndPoint}/users`).pipe(
       map(res => res as IUser[])
-      // TODO: To remove map?
     );
   }
 
-  /** Get last 5 and not completed TODOs. */
+  /** Get last 5 and not completed TODOs by user. */
   getLastTodos(user: IUser): Observable<ITodo[]> {
     return this.http.get(`${this.apiEndPoint}/todos?userId=${user.id}&completed=false&_sort=id&_order=desc&_limit=5`).pipe(
       map(res => res as ITodo[])

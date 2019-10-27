@@ -19,16 +19,16 @@ export class TableComponent implements OnInit {
   sortKey: string | null = null;
   sortValue: string | null = null;
 
-  constructor(private modalService: NzModalService, private userService: UserService) { }
+  constructor(
+    private modalService: NzModalService,
+    private userService: UserService) { }
 
   ngOnInit() {
     this.loading = true;
     this.todosModalVisible = false;
     this.userService.list().subscribe(users => {
       this.loading = false;
-      this.users = [...users, ...users, ...users, ...users, ...users, ...users];
-      // this.users = [];
-      console.log('users: ', users);
+      this.users = [...users, ...users, ...users, ...users, ...users, ...users]; // TODO: fix it
     });
   }
 
@@ -49,11 +49,6 @@ export class TableComponent implements OnInit {
     }
   }
 
-  currentPageDataChange(event: IUser[]): void {
-    // console.log('currentPageDataChange: ', event);
-    // this.users = event;
-  }
-
   handleShowTodos(user): void {
     const modal: NzModalRef = this.modalService.create({
       nzTitle: `${user.name} uncompleted todos:`,
@@ -61,5 +56,9 @@ export class TableComponent implements OnInit {
       nzComponentParams: { user },
       nzFooter: null
     });
+  }
+
+  getCurrentPageIndicator(userId: string) {
+    return `${userId} of ${this.usersPerPage}`;
   }
 }
