@@ -9,12 +9,14 @@ import { AppComponent } from './app.component';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { TableComponent } from './table/table.component';
+import { InfoModalComponent } from './info-modal/info-modal.component';
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    TableComponent
+    TableComponent,
+    InfoModalComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +28,9 @@ registerLocaleData(en);
   /** config ng-zorro-antd i18n (language && date) **/
   providers: [
     { provide: NZ_I18N, useValue: en_US }
+  ],
+  entryComponents: [
+    InfoModalComponent
   ]
 })
 export class AppModule { }

@@ -1,0 +1,10 @@
+<ul nz-list
+    [nzLoading]="loading"
+    [nzDataSource]="userTodosList"
+    nzBordered
+    nzSize="small"
+    [nzRenderItem]="todoItem">
+    <ng-template #todoItem let-todo>
+        <li nz-list-item [nzContent]="todo.title"></li>
+    </ng-template>
+</ul>

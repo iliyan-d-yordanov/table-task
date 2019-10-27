@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IUser } from '../interfaces/iuser';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { UserService } from '../services/user.service';
+import { IUser } from '../interfaces/iuser';
+import { InfoModalComponent } from '../info-modal/info-modal.component';
 
 @Component({
   selector: 'app-table',
@@ -8,18 +10,24 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
+  usersPerPage = 4;
+  tableSize = 'middle';
+
   users: IUser[] = [];
   loading = true;
+  todosModalVisible = false;
   sortKey: string | null = null;
   sortValue: string | null = null;
 
-  constructor(private userService: UserService) { }
+  constructor(private modalService: NzModalService, private userService: UserService) { }
 
   ngOnInit() {
     this.loading = true;
+    this.todosModalVisible = false;
     this.userService.list().subscribe(users => {
       this.loading = false;
-      this.users = users;
+      this.users = [...users, ...users, ...users, ...users, ...users, ...users];
+      // this.users = [];
       console.log('users: ', users);
     });
   }
@@ -44,5 +52,14 @@ export class TableComponent implements OnInit {
   currentPageDataChange(event: IUser[]): void {
     // console.log('currentPageDataChange: ', event);
     // this.users = event;
+  }
+
+  handleShowTodos(user): void {
+    const modal: NzModalRef = this.modalService.create({
+      nzTitle: `${user.name} uncompleted todos:`,
+      nzContent: InfoModalComponent,
+      nzComponentParams: { user },
+      nzFooter: null
+    });
   }
 }
