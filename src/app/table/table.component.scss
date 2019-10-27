@@ -1,34 +1,186 @@
-::ng-deep table-flip {
-  display: flex;
+$background-color: #dfe1e4;
+$text-color: #071931;
+$active-color: #ff3366;
+@mixin set-link-color() {
+  a {
+    color: $active-color !important;
+  }
+}
 
-  thead {
-    display: flex;
-    flex-direction: column;
+::ng-deep {
+  .usersTable {
+    font-family: Open Sans;
+    font-weight: normal;
 
-    & > tr {
-      flex: 1;
-      & > th:last-child {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        justify-content: center;
+    table {
+      border-width: 3px 1px 0 1px;
+      border-style: solid;
+      border-color: $background-color;
+      border-radius: 0px !important;
+      tr {
+        & > th,
+        & > td {
+          font-size: 16px;
+          line-height: 22px;
+          padding: 11px 31px !important;
+          color: $text-color;
+          button {
+            font-size: 14px;
+            line-height: 19px;
+            color: #0e50aa;
+            padding: 0;
+          }
+        }
+      }
+
+      thead {
+        & > tr {
+          border-radius: 0px !important;
+          & > th {
+            font-weight: bold;
+            color: $text-color;
+            background: $background-color;
+            border-radius: 0px !important;
+            border-bottom: none;
+            &.ant-table-column-sort {
+              background: $background-color;
+            }
+          }
+        }
       }
     }
   }
 
-  tbody {
-    flex: 1;
-    display: flex;
-
-    overflow-x: scroll;
+  nz-pagination {
+    ul {
+      & > li {
+        &.ant-pagination-item {
+          &:hover,
+          &:focus {
+            @include set-link-color;
+          }
+        }
+        &.ant-pagination-item-active {
+          border-color: transparent;
+          color: $active-color;
+          @include set-link-color;
+          &:focus,
+          &:hover {
+            border-color: transparent;
+            @include set-link-color;
+          }
+        }
+        &.ant-pagination-prev,
+        &.ant-pagination-next {
+          &:focus,
+          &:hover {
+            @include set-link-color;
+          }
+        }
+      }
+    }
   }
+}
 
-  tr {
-    display: flex;
-    flex-direction: column;
+@media only screen and (max-width: 767px) {
+  ::ng-deep {
+    nz-content.ant-layout-content {
+      & > div.inner-content {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
 
-    td {
-      white-space: nowrap;
+    .usersTable {
+      table {
+        display: flex;
+        font: normal 14px/19px Open Sans;
+
+        thead {
+          display: flex;
+          flex-direction: column;
+          & > tr {
+            flex: 1;
+            & > th {
+              border-bottom: 1px solid $background-color;
+              padding: 18px 20px !important;
+              &:last-child {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                justify-content: center;
+              }
+            }
+          }
+        }
+
+        tbody {
+          flex: 1;
+          display: flex;
+          overflow-x: scroll;
+          tr {
+            td {
+              // TODO: only first child in css or in html
+              &.partial-border:before {
+                content: attr(col-indicator);
+                font-family: Open Sans;
+                font-weight: 100;
+                font-size: 12px;
+                line-height: 17px;
+                color: $active-color;
+                border-bottom: 3px solid $active-color;
+                position: absolute;
+                width: 33px;
+                left: 121px;
+                bottom: 99%;
+              }
+            }
+          }
+          tr:not(:last-child) {
+            td {
+              border-right: 1px solid $background-color;
+            }
+          }
+        }
+
+        tr {
+          display: flex;
+          flex-direction: column;
+          td {
+            white-space: nowrap;
+            padding: 18px 33px !important;
+            button {
+              height: auto;
+            }
+          }
+        }
+      }
+    }
+
+    nz-pagination {
+      & > ul {
+        & > li {
+          &.ant-pagination-item-active {
+            font-weight: bold;
+          }
+          &.ant-pagination-prev,
+          &.ant-pagination-next {
+            border-color: $background-color;
+            border: 1px solid $background-color;
+            border-radius: 50%;
+            vertical-align: middle;
+            text-align: center;
+            width: 35px !important;
+            height: 35px !important;
+            padding: 5px;
+            line-height: 22px !important;
+          }
+          &.ant-pagination-next {
+            margin-left: 2px !important;
+            margin-right: 7px !important;
+          }
+        }
+      }
     }
   }
 }
