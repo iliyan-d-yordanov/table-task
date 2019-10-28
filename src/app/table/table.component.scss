@@ -118,9 +118,8 @@ $active-color: #ff3366;
           flex: 1;
           display: flex;
           overflow-x: scroll;
-          tr {
-            td {
-              // TODO: only first child in css or in html
+          & > tr:first-child {
+            & > td {
               &.partial-border:before {
                 content: attr(col-indicator);
                 font-family: Open Sans;
@@ -131,8 +130,8 @@ $active-color: #ff3366;
                 border-bottom: 3px solid $active-color;
                 position: absolute;
                 width: 33px;
-                left: 121px;
-                bottom: 99%;
+                left: 118px;
+                bottom: 99.3%;
               }
             }
           }
