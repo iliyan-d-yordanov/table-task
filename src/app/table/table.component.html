@@ -18,8 +18,13 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let user of userTable.data">
-            <td class="partial-border" [attr.col-indicator]="getCurrentPageIndicator(user.id)">{{user.id}}</td>
+        <tr *ngFor="let user of userTable.data; index as i"
+            [attr.data-index]="i">
+            <td #userTd
+                class="partial-border"
+                [attr.col-indicator]="getCurrentPageIndicator(user.id)">
+                {{user.id}}
+            </td>
             <td>{{user.name}}</td>
             <td>{{user.username}}</td>
             <td>{{user.email}}</td>
