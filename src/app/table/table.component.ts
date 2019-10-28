@@ -28,7 +28,7 @@ export class TableComponent implements OnInit {
     this.todosModalVisible = false;
     this.userService.list().subscribe(users => {
       this.loading = false;
-      this.users = [...users, ...users, ...users, ...users, ...users, ...users]; // TODO: fix it
+      this.users = [...users];
     });
   }
 
@@ -59,6 +59,7 @@ export class TableComponent implements OnInit {
   }
 
   getCurrentPageIndicator(userId: string) {
-    return `${userId} of ${this.usersPerPage}`;
+    // return `${userId} of ${this.usersPerPage}`;
+    return `1 of ${this.usersPerPage}`;
   }
 }
